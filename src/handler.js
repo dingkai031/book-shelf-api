@@ -89,7 +89,9 @@ const allBooksHandler = (req, h) => {
     res.code(200);
     return res;
   }
-  if (req.query) {
+  // Thanks dicoding team, I forgot that empty array and object is truthy
+  // before is, if (req.query)
+  if (category.length > 0) {
     req.query[category] = parseInt(req.query[category], 2) === 1;
     const readingBooks = books.filter(
       (book) => book[category] === req.query[category]
